@@ -1,26 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import only from "./img/ONLY.png"
+import {Login} from "./Login";
+// import styled from "styled-components";
+
+// const ImgStyled = styled.div`
+//   max-height: 78px;
+//   max-width: 180px;
+//   margin-top: 40px;
+//   margin-left: 44%
+// `
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            {/*<ImgStyled>*/}
+                <img className="img" src={only} alt="only"/>
+            {/*</ImgStyled>*/}
+
+
+
+            <Login/>
+        </div>
+    );
 }
 
 export default App;

@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Getting Started test task for Only.
+Stack: React, Typescript, React-router, Styled-components, React-hook-form
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 

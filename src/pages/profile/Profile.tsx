@@ -11,7 +11,7 @@ export const Profile = (): ReturnComponentType => (
   <div className="profile">
     <div>
       Здравствуйте,{' '}
-      <span style={{ fontWeight: 'bold' }}> ${REACT_APP_DEFAULT_EMAIL}</span>
+      <span style={{ fontWeight: 'bold' }}> {REACT_APP_DEFAULT_EMAIL}</span>
     </div>
 
     <NavLink to={PATH.LOGIN}>

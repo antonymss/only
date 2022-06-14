@@ -40,18 +40,33 @@
     margin-bottom: 20px;
     font-size: 16px;
 }
-
-.errorMessage{
-    width: 620px;
+.inputError{
+    background-color: #F5F5F5;
+    width: 640px;
+    height: 60px;
     border-radius: 8px;
-    background-color: #F5E9E9;
-    border: 1px solid #E26F6F;
     margin-top: 10px;
     margin-bottom: 20px;
     font-size: 16px;
-    padding-top: 23px;
-    padding-bottom: 23px;
+    border: 1px solid red;
+    color: red;
+}
+.inputError:focus{outline-color: red}
+
+.errorMessageInput{
+    background-color:#F5E9E9;
+    width: 640px;
+    height: 60px;
+    border-radius: 8px;
+    border: 1px solid red;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+.errorMessage {
     padding-left: 20px;
+    font-size: 16px;
+
 }
 
 .button {
@@ -68,12 +83,28 @@
     color: #FFFFFF;
     margin-top: 20px;
 }
-.error{
+.disableButton{
+    width: 640px;
+    height: 60px;
+    background: red;
+    border-radius: 8px;
+    border: none;
+    font-family: 'Helvetica Neue';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    margin-top: 20px;
+}
+
+.error {
     color: #E26F6F;
     margin-bottom: 20px;
     margin-top: -10px;
 }
-.profile{
+
+.profile {
     font-family: 'Helvetica Neue';
     font-style: normal;
     font-weight: 400;
@@ -89,7 +120,8 @@
     justify-content: center;
     flex-direction: column;
 }
-.grayButton{
+
+.grayButton {
     width: 200px;
     height: 60px;
     background: #F5F5F5;
@@ -101,5 +133,31 @@
     font-weight: 700;
     font-size: 18px;
     line-height: 22px;
+}
+
+input[type="checkbox"] {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.checkbox {
+    display: inline-block;
+    height: 14px;
+    width: 14px;
+    background: #fff;
+    border: 1px #000 solid;
+    margin-right: 15px;
+    border-radius: 2px;
+     cursor: pointer;
+}
+
+.checkbox--active {
+    border-color: #000;
+    background: #4A67FF;
 }
 

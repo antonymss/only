@@ -1,15 +1,18 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from "react-router-dom";
 
-import 'styles/App.css';
-import only from 'assets/img/ONLY.png';
-import { PATH } from 'enums';
-import { Login, Profile } from 'pages';
-import { ReturnComponentType } from 'types';
+import { PATH } from "enums";
+import { Login, Profile } from "pages";
+import { ReturnComponentType } from "types";
+import { StyledImg } from "styles/style";
 
 const App = (): ReturnComponentType => (
-  <div className="App">
-    <img className="img" src={only} alt="only" />
+  <div>
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <StyledImg />
+    </div>
+
     <Routes>
+      <Route path="*" element={<Navigate to={PATH.LOGIN} />} />
       <Route path={PATH.LOGIN} element={<Login />} />
       <Route path={PATH.PROFILE} element={<Profile />} />
     </Routes>

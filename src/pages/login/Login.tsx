@@ -1,56 +1,87 @@
 /* eslint-disable */
-import * as React from 'react';
+import * as React from "react";
 
-import '../../styles/App.css';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import error from '../../assets/img/error.png'
+import "../../styles/App.css";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-import { FormValuesType } from './types';
-import { ReturnComponentType } from 'types';
-import { PATH } from 'enums';
-import { useNavigate } from 'react-router-dom';
-import {useState} from "react";
+import { FormValuesType } from "./types";
+import { ReturnComponentType } from "types";
+import { PATH } from "enums";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { StyledForm, StyledTitle, StyledTitleLabel } from "./style";
+import { Handler } from "common";
 
-const { REACT_APP_DEFAULT_EMAIL , REACT_APP_DEFAULT_PASSWORD   } = process.env;
+const { REACT_APP_DEFAULT_EMAIL, REACT_APP_DEFAULT_PASSWORD } = process.env;
 
 export const Login = (): ReturnComponentType => {
   const {
     handleSubmit,
     register,
-    control,
+    getValues,
     formState: { errors, isSubmitting },
-  } = useForm<FormValuesType>();
+  } = useForm<FormValuesType>({
+    mode: "onChange",
+    defaultValues: {
+      login: "",
+    },
+  });
 
+  const [state, setState] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<FormValuesType> = ({login, password, checkbox}) => {
-    if (login === REACT_APP_DEFAULT_EMAIL && password === REACT_APP_DEFAULT_PASSWORD) {
-      navigate(PATH.PROFILE, { replace: true });
-    }
-    <div className="errorMessageInput" > <img src={error} width="20px" height="20px" style={{paddingLeft:"20px"}}/><span className="errorMessage">Пользователя ${login} не существует</span> </div>;
+  useEffect(() => {
+    let timeOutId: ReturnType<typeof setTimeout>;
 
+    if (state) {
+      timeOutId = setTimeout(() => {
+        setState(false);
+      }, 2000);
+    }
+    return () => {
+      if (state) {
+        clearTimeout(timeOutId);
+      }
+    };
+  }, [state]);
+
+  const onSubmit: SubmitHandler<FormValuesType> = ({
+    login,
+    password,
+    checkbox,
+  }) => {
+    if (
+      login === REACT_APP_DEFAULT_EMAIL &&
+      password === REACT_APP_DEFAULT_PASSWORD
+    ) {
+      navigate(PATH.PROFILE, { replace: true });
+    } else {
+      setState(true);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="form">
+    <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      {state && <Handler login={getValues("login")} />}
       <div className="container">
-        {errors.login != REACT_APP_DEFAULT_EMAIL && <div>{errors.login}</div>}
+
         <section>
-          <div className="title">Логин</div>
+          <StyledTitle>Логин</StyledTitle>
           <input
-            {...register('login', { required: true })}
-            className={clsx("input",errors.login && "inputError")}
+            {...register("login", { required: true })}
+            className={clsx("input", errors.login && "inputError")}
             type="email"
           />
           {errors.login && <div className="error">Обязательное поле</div>}
         </section>
+
         <section>
-          <div className="title">Пароль</div>
+          <StyledTitle>Пароль</StyledTitle>
           <input
-            {...register('password', { required: true })}
-            className={clsx("input",errors.password && "inputError")}
+            {...register("password", { required: true })}
+            className={clsx("input", errors.password && "inputError")}
             type="password"
           />
           {errors.password && <div className="error">Обязательное поле</div>}
@@ -59,28 +90,27 @@ export const Login = (): ReturnComponentType => {
         <section>
           <label>
             <input
-                {...register('checkbox')}
-                type="checkbox"
-                onChange={() => {
-                  setIsChecked(!isChecked);
-                }}
+              {...register("checkbox")}
+              type="checkbox"
+              onChange={() => {
+                setIsChecked(!isChecked);
+              }}
             />
             <span
-                className={`checkbox ${isChecked ? "checkbox--active" : ""}`}
-                aria-hidden="true"
+              className={`checkbox ${isChecked ? "checkbox--active" : ""}`}
+              aria-hidden="true"
             />
-            <label className="title">Запомнить меня</label>
+            <StyledTitleLabel>Запомнить меня</StyledTitleLabel>
           </label>
-
         </section>
+
         <input
-            className={clsx ("button",isSubmitting && "disableButton" )}
-          // className="button"
+          className={clsx("button", state && "disableButton")}
           type="submit"
           value="Войти"
           disabled={isSubmitting}
         />
       </div>
-    </form>
+    </StyledForm>
   );
 };

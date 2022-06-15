@@ -1,23 +1,21 @@
-import React from 'react';
+import React from "react";
 
-import { NavLink } from 'react-router-dom';
+import { NavLink } from "react-router-dom";
 
-import { PATH } from 'enums';
-import { ReturnComponentType } from 'types';
+import { PATH } from "enums";
+import { ReturnComponentType } from "types";
+import { Button, ProfileStyled } from "./style";
 
 const { REACT_APP_DEFAULT_EMAIL } = process.env;
 
 export const Profile = (): ReturnComponentType => (
-  <div className="profile">
+  <ProfileStyled>
     <div>
-      Здравствуйте,{' '}
-      <span style={{ fontWeight: 'bold' }}> {REACT_APP_DEFAULT_EMAIL}</span>
+      Здравствуйте,
+      <span style={{ fontWeight: "bold" }}> {REACT_APP_DEFAULT_EMAIL}</span>
     </div>
-
     <NavLink to={PATH.LOGIN}>
-      <button type="button" className="grayButton">
-        Выйти
-      </button>
+      <Button type="button">Выйти</Button>
     </NavLink>
-  </div>
+  </ProfileStyled>
 );
